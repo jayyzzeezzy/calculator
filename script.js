@@ -67,3 +67,13 @@ function showResult() {
     secondNumb = screen.textContent;
     screen.textContent = operate(firstNumb, operator, secondNumb);
 };
+
+const allClearBtn = document.querySelector('#allClearBtn');
+allClearBtn.onclick = () => clearScreen();
+
+function clearScreen() {
+    firstNumb = 0;
+    operator = '';
+    secondNumb = 0;
+    screen.textContent = 0;
+};
