@@ -17,8 +17,8 @@ function divide(a, b) {
 
 let firstNumb = 0;
 let secondNumb = 0;
-let operator = "+";
-let operationIsSet = false;
+let operator = null;
+let shouldResetScreen = false;
 
 function operate(a, operator, b) {
     a = Number(a);
@@ -38,8 +38,7 @@ numberBtn.forEach(
 const screen = document.querySelector('#screen');
 
 function appendNumber(string) {
-    if (screen.textContent === '0'|| operationIsSet) {
-        operationIsSet = false;
+    if (screen.textContent === '0'|| shouldResetScreen) {
         resetScreen();
     };
     screen.textContent += string;
@@ -47,33 +46,45 @@ function appendNumber(string) {
 
 function resetScreen() {
     screen.textContent = '';
+    shouldResetScreen = false;
 };
 
 const operatorBtn = document.querySelectorAll('[data-operator]');
 operatorBtn.forEach(
-    (button) => button.addEventListener('click', () => setOperation(screen.textContent, button.textContent))
+    (button) => button.addEventListener('click', () => recordOperation(button.textContent))
 );
 
-function setOperation(number, sign) {
-    firstNumb = number;
+function recordOperation(sign) {
+    if (operator !== null) calculate();
+    firstNumb = screen.textContent;
     operator = sign;
-    operationIsSet = true;
+    shouldResetScreen = true;
 };
 
 const equalBtn = document.querySelector('#equalBtn');
-equalBtn.onclick = () => showResult();
+equalBtn.onclick = () => calculate();
 
-function showResult() {
+function calculate() {
+    if (operator === null || shouldResetScreen) return; 
+    if (screen.textContent === '0' && operator === '÷') {
+        alert("You can't divide by 0!");
+        return;
+    }
     secondNumb = screen.textContent;
-    screen.textContent = operate(firstNumb, operator, secondNumb);
+    screen.textContent = roundResult(operate(firstNumb, operator, secondNumb));
+    operator = null;
+};
+
+function roundResult(number) {
+    return Math.round(number * 1000) / 1000;
 };
 
 const allClearBtn = document.querySelector('#allClearBtn');
 allClearBtn.onclick = () => clearScreen();
 
 function clearScreen() {
-    firstNumb = 0;
-    operator = '';
-    secondNumb = 0;
+    firstNumb = '';
+    operator = null;
+    secondNumb = '';
     screen.textContent = 0;
 };
