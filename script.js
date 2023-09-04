@@ -88,3 +88,25 @@ function clearScreen() {
     secondNumb = '';
     screen.textContent = 0;
 };
+
+const percentBtn = document.querySelector('#percentBtn');
+percentBtn.onclick = () => setPercentage(screen.textContent);
+function setPercentage(number) {
+    screen.textContent = Math.round((number / 100) * 1000) / 1000;
+};
+
+const deleteBtn = document.querySelector('#deleteBtn');
+deleteBtn.onclick = () => deleteNumber();
+function deleteNumber() {
+    screen.textContent = screen.textContent.toString().slice(0, -1);
+};
+
+const decimalBtn = document.querySelector('#decimalBtn');
+decimalBtn.onclick = () => appendDecimal();
+function appendDecimal() {
+    if (screen.textContent === '') {
+        screen.textContent = '0';
+    }
+    if (screen.textContent.includes('.')) return
+    screen.textContent += '.';
+};
