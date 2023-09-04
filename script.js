@@ -110,3 +110,30 @@ function appendDecimal() {
     if (screen.textContent.includes('.')) return
     screen.textContent += '.';
 };
+
+window.addEventListener('keydown', handleKeyboardEvents);
+function handleKeyboardEvents(e) {
+    if (e.key >= 0 && e.key <= 9) appendNumber(e.key);
+    if (e.key === '.') appendDecimal();
+    if (e.key === '=' || e.key === 'Enter') calculate();
+    if (e.key === 'Backspace') deleteNumber();
+    if (e.key === 'Escape') clearScreen();
+    if (e.key === '+' || e.key === '-' || e.key === '/' || e.key === '*') {
+        recordOperation(convertOperator(e.key));
+    }
+};
+
+function convertOperator(sign) {
+    switch (sign) {
+        case '/':
+            return '÷';
+        case '*':
+            return '×';
+        case '-':
+            return '-';
+        case '+':
+            return '+';
+        default:
+            return;
+    }
+};
