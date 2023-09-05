@@ -6,6 +6,7 @@ body {
 }
 
 body {
+    background-color: #E8E8E8;
     margin: 0px;
     padding: 0px;
     display: flex;
@@ -22,6 +23,7 @@ body {
 }
 
 .calculator {
+    background-color: #555555;
     width: 400px;
     border: 2px solid black;
     border-radius: 15px;
@@ -36,6 +38,7 @@ body {
     padding: 10px 20px;
     margin-bottom: 20px;
     border-radius: 5px;
+    background-color: #EAEAEA;
 }
 
 .buttons-grid {
@@ -49,6 +52,49 @@ body {
     border: 2px solid black;
     font-size: 20px;
     border-radius: 5px;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+}
+#allClearBtn,
+#deleteBtn {
+    background-color: #555555;
+    color: #8B00FF;
+}
+
+#allClearBtn:hover {
+    background-color: #FF5555;
+    color: white;
+}
+
+#deleteBtn:hover {
+    background-color: #555FFF;
+    color: white;
+}
+
+[data-number],
+#decimalBtn {
+    background-color: #555555;
+}
+
+[data-number]:hover,
+#decimalBtn:hover {
+    background-color: #8B00FF;
+}
+
+[data-operator],
+#percentBtn,
+#equalBtn {
+    font-size: 35px;
+    background-color: #555555;
+    color: #8B00FF;
+}
+
+[data-operator]:hover,
+#percentBtn:hover,
+#equalBtn:hover {
+    background-color: #8B00FF;
+    color: white;
 }
 
 .span-2 {
