@@ -1,3 +1,6 @@
+// maximum digits allowed
+const DIGITMAX = 17;
+
 // basic calculation logic
 function add(a, b) {
     return a + b;
@@ -38,6 +41,7 @@ numberBtn.forEach(
 const screen = document.querySelector('#screen');
 
 function appendNumber(string) {
+    if (screen.textContent.length >= DIGITMAX) return;
     if (screen.textContent === '0'|| shouldResetScreen) {
         resetScreen();
     };
