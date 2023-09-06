@@ -83,8 +83,7 @@ body {
 }
 
 [data-operator],
-#percentBtn,
-#equalBtn {
+#percentBtn {
     font-size: 35px;
     background-color: #555555;
     color: #8B00FF;
@@ -92,9 +91,13 @@ body {
 
 [data-operator]:hover,
 #percentBtn:hover,
-#equalBtn:hover {
+#equalBtn {
     background-color: #8B00FF;
     color: white;
+}
+
+#equalBtn:hover {
+    background-color: #7100D1;
 }
 
 .span-2 {
