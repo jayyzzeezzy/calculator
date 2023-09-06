@@ -1,5 +1,30 @@
+let firstNumb = 0;
+let secondNumb = 0;
+let operator = null;
+let shouldResetScreen = false;
 // maximum digits allowed
 const DIGITMAX = 17;
+
+const screen = document.querySelector('#screen');
+const numberBtn = document.querySelectorAll('[data-number]');
+const operatorBtn = document.querySelectorAll('[data-operator]');
+const equalBtn = document.querySelector('#equalBtn');
+const allClearBtn = document.querySelector('#allClearBtn');
+const percentBtn = document.querySelector('#percentBtn');
+const deleteBtn = document.querySelector('#deleteBtn');
+const decimalBtn = document.querySelector('#decimalBtn');
+
+numberBtn.forEach(
+    (button) => button.addEventListener('click', () => appendNumber(button.textContent))
+);
+operatorBtn.forEach(
+    (button) => button.addEventListener('click', () => recordOperation(button.textContent))
+);
+equalBtn.onclick = () => calculate();
+allClearBtn.onclick = () => clearScreen();
+percentBtn.onclick = () => setPercentage(screen.textContent);
+deleteBtn.onclick = () => deleteNumber();
+decimalBtn.onclick = () => appendDecimal();
 
 // basic calculation logic
 function add(a, b) {
@@ -18,10 +43,18 @@ function divide(a, b) {
     return a / b;
 };
 
-let firstNumb = 0;
-let secondNumb = 0;
-let operator = null;
-let shouldResetScreen = false;
+// function declaration
+function roundResult(number) {
+    return Math.round(number * 1000) / 1000;
+};
+
+function setPercentage(number) {
+    screen.textContent = Math.round((number / 100) * 1000) / 1000;
+};
+
+function deleteNumber() {
+    screen.textContent = screen.textContent.toString().slice(0, -1);
+};
 
 function operate(a, operator, b) {
     a = Number(a);
@@ -31,14 +64,6 @@ function operate(a, operator, b) {
     if (operator == "×") return multiply(a, b);
     if (operator == "÷") return divide(a, b);
 };
-
-// for click events and only numbers
-const numberBtn = document.querySelectorAll('[data-number]');
-numberBtn.forEach(
-    (button) => button.addEventListener('click', () => appendNumber(button.textContent))
-);
-
-const screen = document.querySelector('#screen');
 
 function appendNumber(string) {
     if (screen.textContent.length >= DIGITMAX) return;
@@ -53,20 +78,12 @@ function resetScreen() {
     shouldResetScreen = false;
 };
 
-const operatorBtn = document.querySelectorAll('[data-operator]');
-operatorBtn.forEach(
-    (button) => button.addEventListener('click', () => recordOperation(button.textContent))
-);
-
 function recordOperation(sign) {
     if (operator !== null) calculate();
     firstNumb = screen.textContent;
     operator = sign;
     shouldResetScreen = true;
 };
-
-const equalBtn = document.querySelector('#equalBtn');
-equalBtn.onclick = () => calculate();
 
 function calculate() {
     if (operator === null || shouldResetScreen) return; 
@@ -79,13 +96,6 @@ function calculate() {
     operator = null;
 };
 
-function roundResult(number) {
-    return Math.round(number * 1000) / 1000;
-};
-
-const allClearBtn = document.querySelector('#allClearBtn');
-allClearBtn.onclick = () => clearScreen();
-
 function clearScreen() {
     firstNumb = '';
     operator = null;
@@ -93,20 +103,6 @@ function clearScreen() {
     screen.textContent = 0;
 };
 
-const percentBtn = document.querySelector('#percentBtn');
-percentBtn.onclick = () => setPercentage(screen.textContent);
-function setPercentage(number) {
-    screen.textContent = Math.round((number / 100) * 1000) / 1000;
-};
-
-const deleteBtn = document.querySelector('#deleteBtn');
-deleteBtn.onclick = () => deleteNumber();
-function deleteNumber() {
-    screen.textContent = screen.textContent.toString().slice(0, -1);
-};
-
-const decimalBtn = document.querySelector('#decimalBtn');
-decimalBtn.onclick = () => appendDecimal();
 function appendDecimal() {
     if (screen.textContent === '') {
         screen.textContent = '0';
