@@ -124,7 +124,13 @@ function handleKeyboardEvents(e) {
     if (e.key === 'Escape') clearScreen();
     if (e.key === '+' || e.key === '-' || e.key === '/' || e.key === '*') {
         recordOperation(convertOperator(e.key));
-    }
+    };
+    if (e.key === 'Shift' && e.key === '+') {
+        recordOperation('+');
+    };
+    if (e.key === 'Shift' && e.key === '*') {
+        recordOperation('×');
+    };
 };
 
 function convertOperator(sign) {
