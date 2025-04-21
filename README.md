@@ -30,6 +30,8 @@ I have also added some visual effects when users hover over each button to make 
 
     Right click on ``index.html``, then select **Open with Live Server**
 
+    ![Live preview](site-preview.png)
+
 ## Contribute
 
 - Issue Tracker: github.com/jayyzzeezzy/calculator/issues
